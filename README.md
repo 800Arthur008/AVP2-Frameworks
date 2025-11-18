@@ -1,2 +1,2 @@
 # AVP2-Frameworks
-Avaliação de Frameworks
+Repositório oficial do projeto de web quiz referente à AVP2 da cadeira de Framework
