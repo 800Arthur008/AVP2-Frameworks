@@ -5,6 +5,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/category/{id}', function ($id) {
+    return inertia('CategoryDetail', [
+        'category' => ['id' => $id]
+    ]);
+})->middleware('auth')->name('category.show');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
