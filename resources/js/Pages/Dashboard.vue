@@ -37,12 +37,13 @@ const categories = [
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div
+                            <Link
                                 v-for="category in categories"
                                 :key="category.id"
+                                :href="`/category/${category.id}`"
                                 :class="[
                                     category.color,
-                                    'p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-white'
+                                    'p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-white no-underline'
                                 ]"
                             >
                                 <div class="text-center">
@@ -51,7 +52,7 @@ const categories = [
                                         {{ category.name }}
                                     </h3>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
