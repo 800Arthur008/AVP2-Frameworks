@@ -1,0 +1,275 @@
+✅ PROGRAMAÇÃO (5 perguntas)
+1.
+
+Qual é a linguagem usada para estruturar páginas da web?
+A) CSS
+B) HTML
+C) Python
+D) SQL
+Resposta: B
+
+2.
+
+Em Python, qual símbolo é usado para comentários de linha única?
+A) //
+B) <!-- -->
+C) #
+D) /* */
+Resposta: C
+
+3.
+
+Qual estrutura de dados funciona no modelo FIFO?
+A) Pilha
+B) Lista Encadeada
+C) Árvore Binária
+D) Fila
+Resposta: D
+
+4.
+
+O que significa “==” em linguagens como C e JavaScript?
+A) Atribuição
+B) Comparação de igualdade
+C) Comparação de tipos
+D) Operador lógico
+Resposta: B
+
+5.
+
+No Git, qual comando envia mudanças para o repositório remoto?
+A) git push
+B) git add
+C) git commit
+D) git fetch
+Resposta: A
+
+🏺 HISTÓRIA (5 perguntas)
+1.
+
+Quem foi o primeiro imperador de Roma?
+A) Júlio César
+B) Nero
+C) Augusto
+D) Trajano
+Resposta: C
+
+2.
+
+Qual evento marcou o início da Segunda Guerra Mundial?
+A) Ataque a Pearl Harbor
+B) Invasão da Polônia
+C) Queda da Bolsa de 1929
+D) Batalha de Stalingrado
+Resposta: B
+
+3.
+
+Quem descobriu o Brasil em 1500?
+A) Cristóvão Colombo
+B) Bartolomeu Dias
+C) Pedro Álvares Cabral
+D) Vasco da Gama
+Resposta: C
+
+4.
+
+A Revolução Francesa começou em que ano?
+A) 1492
+B) 1789
+C) 1815
+D) 1914
+Resposta: B
+
+5.
+
+Que civilização construiu as pirâmides de Gizé?
+A) Fenícios
+B) Egípcios
+C) Sumérios
+D) Babilônios
+Resposta: B
+
+🌍 GEOGRAFIA (5 perguntas)
+1.
+
+Qual é o maior oceano do mundo?
+A) Atlântico
+B) Índico
+C) Pacífico
+D) Ártico
+Resposta: C
+
+2.
+
+Qual é a capital do Canadá?
+A) Vancouver
+B) Toronto
+C) Montreal
+D) Ottawa
+Resposta: D
+
+3.
+
+O Monte Everest fica em qual continente?
+A) América
+B) Europa
+C) Ásia
+D) África
+Resposta: C
+
+4.
+
+Qual é o rio mais extenso do mundo?
+A) Mississippi
+B) Nilo
+C) Yangtzé
+D) Amazonas
+Resposta: D (medição atual mais aceita)
+
+5.
+
+Qual país possui a maior população do mundo?
+A) China
+B) Índia
+C) EUA
+D) Indonésia
+Resposta: B (desde 2023)
+
+💻 COMPUTAÇÃO (5 perguntas)
+1.
+
+O que é RAM?
+A) Memória permanente
+B) Memória volátil de acesso rápido
+C) Processador gráfico
+D) Tipo de disco rígido
+Resposta: B
+
+2.
+
+Qual desses é um sistema operacional?
+A) Chrome
+B) Windows
+C) Bluetooth
+D) HDMI
+Resposta: B
+
+3.
+
+O que significa "IP" em redes?
+A) Internal Program
+B) Internet Protocol
+C) Input Process
+D) Integrated Port
+Resposta: B
+
+4.
+
+Qual porta é usada por padrão pelo HTTP?
+A) 22
+B) 43
+C) 80
+D) 8080
+Resposta: C
+
+5.
+
+Qual empresa criou o processador M1?
+A) AMD
+B) Intel
+C) Qualcomm
+D) Apple
+Resposta: D
+
+🎬 FILMES (5 perguntas)
+1.
+
+Quem dirigiu o filme “Jurassic Park”?
+A) James Cameron
+B) George Lucas
+C) Steven Spielberg
+D) Ridley Scott
+Resposta: C
+
+2.
+
+Qual filme tem o personagem Darth Vader?
+A) Star Wars
+B) Star Trek
+C) Duna
+D) Avatar
+Resposta: A
+
+3.
+
+Em qual filme aparece o personagem "Coringa" interpretado por Heath Ledger?
+A) Joker
+B) Batman Begins
+C) O Cavaleiro das Trevas
+D) Esquadrão Suicida
+Resposta: C
+
+4.
+
+Qual filme venceu o Oscar de Melhor Filme em 1997?
+A) Titanic
+B) Forrest Gump
+C) Gladiador
+D) Matrix
+Resposta: A
+
+5.
+
+"Buzz Lightyear" é personagem de qual franquia?
+A) Minions
+B) Toy Story
+C) Shrek
+D) Carros
+Resposta: B
+
+🎮 JOGOS (5 perguntas)
+1.
+
+Em qual jogo aparece o personagem Master Chief?
+A) Halo
+B) Doom
+C) Crysis
+D) Destiny
+Resposta: A
+
+2.
+
+Qual empresa criou o PlayStation?
+A) Nintendo
+B) Sega
+C) Microsoft
+D) Sony
+Resposta: D
+
+3.
+
+Qual jogo popular tem a frase “The cake is a lie”?
+A) Half-Life
+B) Portal
+C) Bioshock
+D) Fallout
+Resposta: B
+
+4.
+
+Qual é o gênero principal de “The Witcher 3”?
+A) Corrida
+B) Aventura
+C) RPG
+D) FPS
+Resposta: C
+
+5.
+
+Mario é mascote de qual empresa?
+A) Sega
+B) Capcom
+C) Nintendo
+D) Ubisoft
+Resposta: C
