@@ -7,9 +7,9 @@ use Inertia\Inertia;
 
 class QuizController extends Controller
 {
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::with('questions')->findOrFail($id);
+        $category->load('questions');
 
         return Inertia::render('Quiz', [
             'category' => $category,

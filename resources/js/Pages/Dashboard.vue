@@ -1,17 +1,33 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import Rank from '../../images/rank.png'
-import { Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+import Rank from '../../images/rank.png';
+import { Head, Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-const categories = [
-    { id: 1, name: 'História', icon: '📚', color: 'bg-blue-500' },
-    { id: 2, name: 'Jogos', icon: '🎮', color: 'bg-purple-500' },
-    { id: 3, name: 'Filmes', icon: '🎬', color: 'bg-red-500' },
-    { id: 4, name: 'Geografia', icon: '🌎', color: 'bg-orange-500'},
-    { id: 5, name: 'Computação', icon: '💻', color: 'bg-green-500' },
-    { id: 6, name: 'Programação', icon: '⌨️', color: 'bg-yellow-500' },
+const props = defineProps({
+    categories: {
+        type: Array,
+        required: true,
+    },
+});
+
+const palette = [
+    'bg-blue-500',
+    'bg-purple-500',
+    'bg-red-500',
+    'bg-orange-500',
+    'bg-green-500',
+    'bg-yellow-500',
+    'bg-pink-500',
+    'bg-indigo-500',
 ];
+
+const categoriesWithColor = computed(() =>
+    props.categories.map((category, index) => ({
+        ...category,
+        color: palette[index % palette.length],
+    })),
+);
 </script>
 
 <template>
@@ -36,14 +52,14 @@ const categories = [
                             Escolha uma categoria para começar
                         </p>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div v-if="categoriesWithColor.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <Link
-                                v-for="category in categories"
+                                v-for="category in categoriesWithColor"
                                 :key="category.id"
-                                :href="`/category/${category.id}`"
+                                :href="route('category.show', category.id)"
                                 :class="[
                                     category.color,
-                                    'p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-white no-underline'
+                                    'p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-white no-underline relative'
                                 ]"
                             >
                                 <div class="text-center">
@@ -51,8 +67,15 @@ const categories = [
                                     <h3 class="text-2xl font-semibold">
                                         {{ category.name }}
                                     </h3>
+                                    <p class="text-sm mt-2 opacity-80">
+                                        {{ category.questions_count }} {{ category.questions_count === 1 ? 'pergunta' : 'perguntas' }}
+                                    </p>
                                 </div>
                             </Link>
+                        </div>
+
+                        <div v-else class="text-center text-gray-500">
+                            Ainda não há categorias disponíveis. Fale com um administrador.
                         </div>
                     </div>
                 </div>

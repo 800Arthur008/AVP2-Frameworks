@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,5 +13,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
         ]);
+
+        User::updateOrCreate(
+            ['email' => 'admin@fapquiz.test'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('password'),
+                'is_admin' => true,
+                'email_verified_at' => now(),
+            ],
+        );
     }
 }

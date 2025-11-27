@@ -12,12 +12,12 @@ class CategorySeeder extends Seeder
     {
         // Criar categorias
         $categories = [
-            ['id' => 1, 'name' => 'História', 'icon' => '📚'],
-            ['id' => 2, 'name' => 'Jogos', 'icon' => '🎮'],
-            ['id' => 3, 'name' => 'Filmes', 'icon' => '🎬'],
-            ['id' => 4, 'name' => 'Geografia', 'icon' => '🌎'],
-            ['id' => 5, 'name' => 'Computação', 'icon' => '💻'],
-            ['id' => 6, 'name' => 'Programação', 'icon' => '⌨️'],
+            ['name' => 'História', 'icon' => '📚'],
+            ['name' => 'Jogos', 'icon' => '🎮'],
+            ['name' => 'Filmes', 'icon' => '🎬'],
+            ['name' => 'Geografia', 'icon' => '🌎'],
+            ['name' => 'Computação', 'icon' => '💻'],
+            ['name' => 'Programação', 'icon' => '⌨️'],
         ];
 
         foreach ($categories as $cat) {
