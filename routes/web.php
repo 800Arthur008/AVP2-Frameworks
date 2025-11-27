@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Foundation\Application;
@@ -15,22 +19,29 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [CategoryController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/category/{id}', function ($id) {
-        return inertia('CategoryDetail', [
-            'category' => ['id' => $id]
-        ]);
-    })->name('category.show');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/category/{category}', [CategoryController::class, 'show'])
+        ->name('category.show');
 
-    Route::get('/quiz/{id}', [QuizController::class, 'show'])->name('quiz.show');
+    Route::get('/quiz/{category}', [QuizController::class, 'show'])
+        ->name('quiz.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('admin')
+        ->name('admin.')
+        ->middleware('admin')
+        ->group(function () {
+            Route::get('/', AdminDashboardController::class)->name('dashboard');
+            Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+            Route::post('/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
+        });
 });
 
 require __DIR__.'/auth.php';

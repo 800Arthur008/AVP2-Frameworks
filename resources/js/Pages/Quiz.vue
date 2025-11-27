@@ -8,15 +8,6 @@ const props = defineProps({
     questions: Array,
 });
 
-const categoryTitles = {
-    1: 'História',
-    2: 'Jogos',
-    3: 'Filmes',
-    4: 'Geografia',
-    5: 'Computação',
-    6: 'Programação'
-};
-
 const currentQuestion = ref(0);
 const userAnswers = ref([]);
 const quizFinished = ref(false);
@@ -159,7 +150,7 @@ const getResultMessage = (percentage) => {
                         <!-- Botão voltar -->
                         <div class="flex justify-center">
                             <Link
-                                href="/dashboard"
+                                :href="route('dashboard')"
                                 class="inline-block rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-12 py-4 font-semibold text-black transition-all duration-300 hover:shadow-lg hover:scale-105"
                             >
                                 Voltar às Categorias
