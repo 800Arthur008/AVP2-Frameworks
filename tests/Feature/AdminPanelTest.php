@@ -80,5 +80,45 @@ class AdminPanelTest extends TestCase
             'question' => 'Qual a capital da França?',
         ]);
     }
+
+    public function test_admin_can_update_category(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $category = Category::create(['name' => 'Original', 'icon' => '🎯']);
+
+        $response = $this->actingAs($admin)
+            ->withSession(['_token' => 'test-token'])
+            ->patch("/admin/categories/{$category->id}", [
+                '_token' => 'test-token',
+                'name' => 'Atualizada',
+                'icon' => '✨',
+            ]);
+
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'name' => 'Atualizada',
+            'icon' => '✨',
+        ]);
+    }
+
+    public function test_admin_can_delete_category(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $category = Category::create(['name' => 'Descartar', 'icon' => '🗑️']);
+
+        $response = $this->actingAs($admin)
+            ->withSession(['_token' => 'test-token'])
+            ->delete("/admin/categories/{$category->id}", [
+                '_token' => 'test-token',
+            ]);
+
+        $response->assertRedirect();
+
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id,
+        ]);
+    }
 }
 

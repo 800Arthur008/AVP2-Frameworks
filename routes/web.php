@@ -40,6 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->group(function () {
             Route::get('/', AdminDashboardController::class)->name('dashboard');
             Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+            Route::patch('/categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
+            Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
             Route::post('/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
         });
 });

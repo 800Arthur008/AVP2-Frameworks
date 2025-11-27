@@ -6,7 +6,7 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
     categories: {
@@ -24,12 +24,21 @@ const categoryForm = useForm({
     icon: '',
 });
 
+const editForm = useForm({
+    name: '',
+    icon: '',
+});
+
+const deleteForm = useForm({});
+
 const questionForm = useForm({
     category_id: '',
     question: '',
     options: ['', '', '', ''],
     correct_option: 0,
 });
+
+const editingId = ref(null);
 
 const submitCategory = () => {
     categoryForm.post(route('admin.categories.store'), {
@@ -45,6 +54,45 @@ const submitQuestion = () => {
             questionForm.reset();
             questionForm.options = ['', '', '', ''];
             questionForm.correct_option = 0;
+        },
+    });
+};
+
+const startEditing = (category) => {
+    editingId.value = category.id;
+    editForm.name = category.name;
+    editForm.icon = category.icon;
+    editForm.clearErrors();
+};
+
+const cancelEditing = () => {
+    editingId.value = null;
+    editForm.reset();
+    editForm.clearErrors();
+};
+
+const submitEdit = (categoryId) => {
+    editForm.patch(route('admin.categories.update', categoryId), {
+        preserveScroll: true,
+        onSuccess: () => cancelEditing(),
+    });
+};
+
+const destroyCategory = (categoryId) => {
+    if (
+        !window.confirm(
+            'Tem certeza de que deseja excluir esta categoria? As perguntas relacionadas também serão removidas.',
+        )
+    ) {
+        return;
+    }
+
+    deleteForm.delete(route('admin.categories.destroy', categoryId), {
+        preserveScroll: true,
+        onFinish: () => {
+            if (editingId.value === categoryId) {
+                cancelEditing();
+            }
         },
     });
 };
@@ -254,25 +302,82 @@ const removeOption = (index) => {
                                     {{ category.questions.length }} perguntas
                                 </div>
                             </div>
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3">
-                                {{ category.name }}
-                            </h4>
 
-                            <ul class="space-y-2 max-h-40 overflow-y-auto pr-2">
-                                <li
-                                    v-for="question in category.questions"
-                                    :key="question.id"
-                                    class="text-sm text-gray-600"
-                                >
-                                    • {{ question.question }}
-                                </li>
-                                <li
-                                    v-if="!category.questions.length"
-                                    class="text-sm text-gray-400 italic"
-                                >
-                                    Nenhuma pergunta ainda.
-                                </li>
-                            </ul>
+                            <div v-if="editingId === category.id" class="space-y-4">
+                                <h4 class="text-lg font-semibold text-gray-800">
+                                    Editar categoria
+                                </h4>
+
+                                <form @submit.prevent="submitEdit(category.id)" class="space-y-3">
+                                    <div>
+                                        <InputLabel :for="`edit-name-${category.id}`" value="Nome" />
+                                        <TextInput
+                                            :id="`edit-name-${category.id}`"
+                                            v-model="editForm.name"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            required
+                                        />
+                                        <InputError :message="editForm.errors.name" class="mt-2" />
+                                    </div>
+
+                                    <div>
+                                        <InputLabel :for="`edit-icon-${category.id}`" value="Ícone/emoji" />
+                                        <TextInput
+                                            :id="`edit-icon-${category.id}`"
+                                            v-model="editForm.icon"
+                                            type="text"
+                                            class="mt-1 block w-full"
+                                            required
+                                        />
+                                        <InputError :message="editForm.errors.icon" class="mt-2" />
+                                    </div>
+
+                                    <div class="flex gap-3">
+                                        <PrimaryButton :disabled="editForm.processing">
+                                            Salvar
+                                        </PrimaryButton>
+                                        <SecondaryButton type="button" @click="cancelEditing">
+                                            Cancelar
+                                        </SecondaryButton>
+                                    </div>
+                                </form>
+                            </div>
+                            <div v-else>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3">
+                                    {{ category.name }}
+                                </h4>
+
+                                <ul class="space-y-2 max-h-40 overflow-y-auto pr-2 mb-4">
+                                    <li
+                                        v-for="question in category.questions"
+                                        :key="question.id"
+                                        class="text-sm text-gray-600"
+                                    >
+                                        • {{ question.question }}
+                                    </li>
+                                    <li
+                                        v-if="!category.questions.length"
+                                        class="text-sm text-gray-400 italic"
+                                    >
+                                        Nenhuma pergunta ainda.
+                                    </li>
+                                </ul>
+
+                                <div class="flex gap-3">
+                                    <SecondaryButton type="button" class="text-sm" @click="startEditing(category)">
+                                        Editar
+                                    </SecondaryButton>
+                                    <button
+                                        type="button"
+                                        class="text-sm text-red-600 hover:text-red-800 font-semibold"
+                                        @click="destroyCategory(category.id)"
+                                        :disabled="deleteForm.processing"
+                                    >
+                                        Excluir
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -280,4 +385,7 @@ const removeOption = (index) => {
         </div>
     </AuthenticatedLayout>
 </template>
+
+
+
 
