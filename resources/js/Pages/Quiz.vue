@@ -1,5 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -12,12 +13,22 @@ const currentQuestion = ref(0);
 const userAnswers = ref([]);
 const quizFinished = ref(false);
 const quizQuestions = props.questions;
+const selectedOption = ref(null);
 
 const selectAnswer = (optionIndex) => {
-    userAnswers.value[currentQuestion.value] = optionIndex;
-    
+    selectedOption.value = optionIndex;
+};
+
+const confirmAnswer = () => {
+    if (selectedOption.value === null) {
+        return;
+    }
+
+    userAnswers.value[currentQuestion.value] = selectedOption.value;
+
     if (currentQuestion.value < quizQuestions.length - 1) {
         currentQuestion.value++;
+        selectedOption.value = userAnswers.value[currentQuestion.value] ?? null;
     } else {
         quizFinished.value = true;
     }
@@ -93,11 +104,12 @@ const getResultMessage = (percentage) => {
                                 v-for="(option, index) in quizQuestions[currentQuestion].options"
                                 :key="index"
                                 @click="selectAnswer(index)"
-                                class="w-full flex items-center gap-4 p-4 text-left border-2 rounded-lg transition-all duration-200 hover:border-blue-500 hover:bg-blue-50"
-                                :class="{
-                                    'border-blue-500 bg-blue-50': userAnswers[currentQuestion] === index,
-                                    'border-gray-300 bg-white': userAnswers[currentQuestion] !== index
-                                }"
+                                class="w-full flex items-center gap-4 p-4 text-left border-2 rounded-lg transition-all duration-200"
+                                :class="[
+                                    selectedOption === index
+                                        ? 'border-blue-500 bg-blue-50'
+                                        : 'border-gray-300 bg-white hover:border-blue-500 hover:bg-blue-50'
+                                ]"
                             >
                                 <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-white font-bold text-lg flex-shrink-0">
                                     {{ String.fromCharCode(65 + index) }}
@@ -106,6 +118,16 @@ const getResultMessage = (percentage) => {
                                     {{ option }}
                                 </span>
                             </button>
+                        </div>
+
+                        <div class="mt-8 flex justify-center">
+                            <PrimaryButton
+                                type="button"
+                                @click="confirmAnswer"
+                                :disabled="selectedOption === null"
+                            >
+                                {{ currentQuestion + 1 === quizQuestions.length ? 'Finalizar quiz' : 'Confirmar resposta' }}
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>
