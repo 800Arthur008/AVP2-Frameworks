@@ -8,7 +8,7 @@ const categories = [
     { id: 1, name: 'História', icon: '📚', gradient: 'from-blue-400 to-blue-600' },
     { id: 2, name: 'Jogos', icon: '🎮', gradient: 'from-purple-400 to-purple-600' },
     { id: 3, name: 'Filmes', icon: '🎬', gradient: 'from-red-400 to-red-600' },
-    { id: 4, name: 'Músicas', icon: '🎵', gradient: 'from-pink-400 to-pink-600' },
+    { id: 4, name: 'Geografia', icon: '🌎', gradient: 'from-pink-400 to-pink-600' },
     { id: 5, name: 'Computação', icon: '💻', gradient: 'from-green-400 to-green-600' },
     { id: 6, name: 'Programação', icon: '⌨️', gradient: 'from-yellow-400 to-yellow-600' },
 ];
@@ -40,7 +40,7 @@ const categories = [
                             <Link 
                                 v-for="category in categories"
                                 :key="category.id"
-                                href="/quiz"
+                                :href="`/quiz/${category.id}`"
                                 class="group"
                             >
                                 <div
