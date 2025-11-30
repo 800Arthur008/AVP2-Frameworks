@@ -1,17 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import Card from '@/Components/Card.vue';
 
-const categories = [
-    { id: 1, name: 'História', icon: '📚', gradient: 'from-blue-400 to-blue-600' },
-    { id: 2, name: 'Jogos', icon: '🎮', gradient: 'from-purple-400 to-purple-600' },
-    { id: 3, name: 'Filmes', icon: '🎬', gradient: 'from-red-400 to-red-600' },
-    { id: 4, name: 'Geografia', icon: '🌎', gradient: 'from-pink-400 to-pink-600' },
-    { id: 5, name: 'Computação', icon: '💻', gradient: 'from-green-400 to-green-600' },
-    { id: 6, name: 'Programação', icon: '⌨️', gradient: 'from-yellow-400 to-yellow-600' },
-];
+defineProps({
+    stats: Object,
+    categories: Array,
+    recent_results: Array,
+});
 </script>
 
 <template>
@@ -64,18 +60,37 @@ const categories = [
                             <Card className="text-center border-purple-200">
                                 <div class="text-4xl mb-2">📊</div>
                                 <h3 class="text-gray-600 text-sm mb-1">Quizzes Completados</h3>
-                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">0</div>
+                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{{ stats.total_quizzes }}</div>
                             </Card>
                             <Card className="text-center border-purple-200">
                                 <div class="text-4xl mb-2">⭐</div>
-                                <h3 class="text-gray-600 text-sm mb-1">Pontuação Total</h3>
-                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">0 pts</div>
+                                <h3 class="text-gray-600 text-sm mb-1">Pontos Totais</h3>
+                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{{ stats.total_points }}</div>
                             </Card>
                             <Card className="text-center border-purple-200">
-                                <div class="text-4xl mb-2">🏆</div>
-                                <h3 class="text-gray-600 text-sm mb-1">Classificação</h3>
-                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">#0</div>
+                                <div class="text-4xl mb-2">📈</div>
+                                <h3 class="text-gray-600 text-sm mb-1">Média de Pontos</h3>
+                                <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{{ stats.average_score }}%</div>
                             </Card>
+                        </div>
+
+                        <!-- Histórico Recente -->
+                        <div v-if="recent_results.length > 0" class="mt-12">
+                            <h2 class="text-2xl font-bold mb-6 text-gray-900">Histórico Recente</h2>
+                            <div class="space-y-3">
+                                <div v-for="result in recent_results" :key="result.id" class="bg-white p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <p class="font-semibold text-gray-900">{{ result.category.name }}</p>
+                                            <p class="text-sm text-gray-600">{{ result.correct_answers }} acertos de {{ result.total_questions }} perguntas</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{{ result.score }}%</div>
+                                            <p class="text-xs text-gray-500">{{ new Date(result.created_at).toLocaleDateString('pt-BR') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

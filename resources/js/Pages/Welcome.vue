@@ -28,11 +28,6 @@ const quizzes = [
           <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Teste seus conhecimentos — divirta-se aprendendo</h1>
           <p class="text-gray-600 mb-6">Plataforma de quizzes com diversos temas e níveis. Faça quizzes rápidos, acompanhe seu progresso e desafie seus amigos.</p>
           <div class="flex gap-3 flex-wrap">
-            <Link href="/quiz" class="inline-block">
-              <button class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition">
-                <span>🚀</span> Começar Quiz
-              </button>
-            </Link>
             <Link v-if="$page.props.canRegister" href="/register" class="inline-block">
               <button class="inline-flex items-center gap-2 border-2 border-purple-300 bg-purple-50 text-purple-600 px-4 py-3 rounded-lg hover:bg-purple-100 transition">
                 <span>✍️</span> Criar conta

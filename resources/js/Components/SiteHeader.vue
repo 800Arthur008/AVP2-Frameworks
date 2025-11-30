@@ -17,8 +17,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
         <Link href="/" class="text-sm font-medium text-gray-700 hover:text-purple-600 transition">Home</Link>
         <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="hidden sm:inline text-sm font-medium text-gray-700 hover:text-purple-600 transition">Dashboard</Link>
         <template v-else>
-          <Link v-if="$page.props.canLogin" :href="route('login')" class="hidden sm:inline text-sm font-medium text-gray-700 hover:text-purple-600 transition">Login</Link>
-          <Link v-if="$page.props.canRegister" :href="route('register')" class="ml-2 hidden sm:inline"><PrimaryButton>Sign up</PrimaryButton></Link>
+          <Link v-if="$page.props.canLogin" :href="route('login')" class="hidden sm:inline text-sm font-medium text-gray-700 hover:text-purple-600 transition">Entrar</Link>
+          <Link v-if="$page.props.canRegister" :href="route('register')" class="ml-2 hidden sm:inline"><PrimaryButton>Cadastrar</PrimaryButton></Link>
         </template>
       </nav>
     </div>

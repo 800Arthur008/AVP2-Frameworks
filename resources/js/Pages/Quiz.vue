@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link, router } from '@inertiajs/vue3'
 import { ref, computed } from 'vue'
 import SiteHeader from '@/Components/SiteHeader.vue'
 import SiteFooter from '@/Components/SiteFooter.vue'
@@ -13,18 +13,21 @@ const props = defineProps({
 const currentQuestionIndex = ref(0)
 const selectedAnswers = ref({})
 const quizFinished = ref(false)
+const isSaving = ref(false)
 
 const currentQuestion = computed(() => props.questions[currentQuestionIndex.value])
 const progress = computed(() => ((currentQuestionIndex.value + 1) / props.questions.length) * 100)
-const score = computed(() => {
-  let correctCount = 0
+const correctCount = computed(() => {
+  let count = 0
   props.questions.forEach((q, index) => {
     if (selectedAnswers.value[index] === q.correct_option) {
-      correctCount++
+      count++
     }
   })
-  return correctCount
+  return count
 })
+const wrongCount = computed(() => props.questions.length - correctCount.value)
+const score = computed(() => Math.round((correctCount.value / props.questions.length) * 100))
 
 const selectAnswer = (optionIndex) => {
     selectedAnswers.value[currentQuestionIndex.value] = optionIndex
@@ -43,6 +46,32 @@ const previousQuestion = () => {
         currentQuestionIndex.value--
     }
 }
+
+const saveResult = () => {
+    isSaving.value = true
+    router.post('/quiz/save-result', {
+        category_id: props.category.id,
+        total_questions: props.questions.length,
+        correct_answers: correctCount.value,
+        wrong_answers: wrongCount.value,
+        score: score.value,
+        user_answers: selectedAnswers.value,
+    }, {
+        onSuccess: () => {
+            setTimeout(() => {
+                router.visit('/dashboard')
+            }, 1500)
+        },
+        onError: () => {
+            isSaving.value = false
+            alert('Erro ao salvar resultado. Tente novamente.')
+        },
+        onFinish: () => {
+            isSaving.value = false
+        }
+    })
+}
+
 
 const restartQuiz = () => {
     currentQuestionIndex.value = 0
@@ -129,8 +158,8 @@ const restartQuiz = () => {
       <div v-else>
         <Card className="border-purple-200 text-center">
           <div class="mb-6">
-            <div v-if="score >= questions.length * 0.8" class="text-6xl mb-4">🏆</div>
-            <div v-else-if="score >= questions.length * 0.6" class="text-6xl mb-4">⭐</div>
+            <div v-if="score >= 80" class="text-6xl mb-4">🏆</div>
+            <div v-else-if="score >= 60" class="text-6xl mb-4">⭐</div>
             <div v-else class="text-6xl mb-4">📚</div>
           </div>
 
@@ -138,21 +167,26 @@ const restartQuiz = () => {
             Quiz Finalizado!
           </h2>
 
-          <div class="mb-8">
-            <p class="text-gray-600 mb-4">Sua pontuação:</p>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-              {{ score }} / {{ questions.length }}
+          <div class="mb-8 grid grid-cols-3 gap-4">
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <div class="text-2xl font-bold text-green-600">{{ correctCount }}</div>
+              <p class="text-sm text-green-700">Acertos</p>
             </div>
-            <p class="text-lg text-gray-600 mt-2">
-              {{ Math.round((score / questions.length) * 100) }}%
-            </p>
+            <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+              <div class="text-2xl font-bold text-red-600">{{ wrongCount }}</div>
+              <p class="text-sm text-red-700">Erros</p>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <div class="text-2xl font-bold text-blue-600">{{ score }}%</div>
+              <p class="text-sm text-blue-700">Pontuação</p>
+            </div>
           </div>
 
           <!-- Feedback -->
           <div class="mb-8 p-4 rounded-lg bg-blue-50 border border-blue-200">
-            <p v-if="score === questions.length" class="text-blue-900 font-semibold">🎉 Parabéns! Você acertou todas as perguntas!</p>
-            <p v-else-if="score >= questions.length * 0.8" class="text-blue-900 font-semibold">😊 Excelente resultado! Você é muito bom!</p>
-            <p v-else-if="score >= questions.length * 0.6" class="text-blue-900 font-semibold">👍 Bom resultado! Continue praticando!</p>
+            <p v-if="score === 100" class="text-blue-900 font-semibold">🎉 Parabéns! Você acertou todas as perguntas!</p>
+            <p v-else-if="score >= 80" class="text-blue-900 font-semibold">😊 Excelente resultado! Você é muito bom!</p>
+            <p v-else-if="score >= 60" class="text-blue-900 font-semibold">👍 Bom resultado! Continue praticando!</p>
             <p v-else class="text-blue-900 font-semibold">💪 Que tal tentar novamente? Você consegue melhorar!</p>
           </div>
 
@@ -176,14 +210,16 @@ const restartQuiz = () => {
 
           <!-- Botões Finais -->
           <div class="flex gap-3">
-            <Link href="/dashboard" class="flex-1">
-              <button class="w-full px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition">
-                ← Voltar para Dashboard
-              </button>
-            </Link>
+            <button
+              @click="saveResult"
+              :disabled="isSaving"
+              class="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition disabled:opacity-50"
+            >
+              {{ isSaving ? 'Salvando...' : 'Salvar e Ir para Dashboard' }} ✅
+            </button>
             <button
               @click="restartQuiz"
-              class="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition"
+              class="flex-1 px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition"
             >
               Refazer Quiz 🔄
             </button>
