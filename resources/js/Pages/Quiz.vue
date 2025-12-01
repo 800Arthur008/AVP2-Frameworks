@@ -41,12 +41,6 @@ const nextQuestion = () => {
     }
 }
 
-const previousQuestion = () => {
-    if (currentQuestionIndex.value > 0) {
-        currentQuestionIndex.value--
-    }
-}
-
 const saveResult = () => {
     isSaving.value = true
     router.post('/quiz/save-result', {
@@ -136,17 +130,11 @@ const restartQuiz = () => {
           </div>
 
           <!-- Botões de Navegação -->
-          <div class="flex gap-3">
-            <button
-              @click="previousQuestion"
-              :disabled="currentQuestionIndex === 0"
-              class="flex-1 px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              ← Anterior
-            </button>
+          <div class="flex justify-center gap-3">
             <button
               @click="nextQuestion"
-              class="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition"
+              :disabled="selectedAnswers[currentQuestionIndex] === undefined"
+              class="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ currentQuestionIndex === questions.length - 1 ? 'Finalizar' : 'Próxima' }} →
             </button>
