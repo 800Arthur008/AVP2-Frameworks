@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
@@ -45,6 +46,7 @@ Route::prefix('admin')
         Route::patch('/categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
         Route::post('/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
+        Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
     });
 
 require __DIR__.'/auth.php';

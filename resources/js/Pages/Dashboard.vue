@@ -27,13 +27,13 @@ defineProps({
                         <h1 class="text-4xl text-center font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-3">
                             Bem-vindo ao AVP Quiz! 🎓
                         </h1>
-                        
+
                         <p class="text-center text-gray-600 mb-12 text-lg">
                             Escolha uma categoria e comece a responder quizzes agora
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <Link 
+                            <Link
                                 v-for="category in categories"
                                 :key="category.id"
                                 :href="`/quiz/${category.id}`"
@@ -47,7 +47,7 @@ defineProps({
                                 >
                                     <div class="text-center">
                                         <div class="text-6xl mb-4 group-hover:scale-125 transition-transform">{{ category.icon }}</div>
-                                        <h3 class="text-2xl font-bold">
+                                        <h3 class="text-2xl font-bold text-black">
                                             {{ category.name }}
                                         </h3>
                                     </div>

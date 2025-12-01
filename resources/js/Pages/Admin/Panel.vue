@@ -38,6 +38,13 @@ const questionForm = useForm({
     correct_option: 0,
 });
 
+const adminForm = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+});
+
 const editingId = ref(null);
 
 const submitCategory = () => {
@@ -55,6 +62,13 @@ const submitQuestion = () => {
             questionForm.options = ['', '', '', ''];
             questionForm.correct_option = 0;
         },
+    });
+};
+
+const submitAdmin = () => {
+    adminForm.post(route('admin.users.store'), {
+        preserveScroll: true,
+        onSuccess: () => adminForm.reset(),
     });
 };
 
@@ -274,6 +288,71 @@ const removeOption = (index) => {
                             </PrimaryButton>
                         </form>
                     </div>
+                </div>
+
+                <div class="bg-white shadow rounded-xl p-6 space-y-6">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        Novo administrador
+                    </h3>
+
+                    <form @submit.prevent="submitAdmin" class="space-y-4">
+                        <div>
+                            <InputLabel for="admin-name" value="Nome" />
+                            <TextInput
+                                id="admin-name"
+                                v-model="adminForm.name"
+                                type="text"
+                                class="mt-1 block w-full"
+                                required
+                                autofocus
+                                autocomplete="name"
+                            />
+                            <InputError class="mt-2" :message="adminForm.errors.name" />
+                        </div>
+
+                        <div>
+                            <InputLabel for="admin-email" value="Email" />
+                            <TextInput
+                                id="admin-email"
+                                v-model="adminForm.email"
+                                type="email"
+                                class="mt-1 block w-full"
+                                required
+                                autocomplete="username"
+                            />
+                            <InputError class="mt-2" :message="adminForm.errors.email" />
+                        </div>
+
+                        <div>
+                            <InputLabel for="admin-password" value="Password" />
+                            <TextInput
+                                id="admin-password"
+                                v-model="adminForm.password"
+                                type="password"
+                                class="mt-1 block w-full"
+                                required
+                                autocomplete="new-password"
+                            />
+                            <InputError class="mt-2" :message="adminForm.errors.password" />
+                        </div>
+
+                        <div>
+                            <InputLabel for="admin-password_confirmation" value="Confirm Password" />
+                            <TextInput
+                                id="admin-password_confirmation"
+                                v-model="adminForm.password_confirmation"
+                                type="password"
+                                class="mt-1 block w-full"
+                                required
+                                autocomplete="new-password"
+                            />
+                            <InputError class="mt-2" :message="adminForm.errors.password_confirmation" />
+                        </div>
+
+                        <PrimaryButton :disabled="adminForm.processing">
+                            Criar Administrador
+                        </PrimaryButton>
+                    </form>
                 </div>
 
                 <div class="bg-white shadow rounded-xl p-6">
