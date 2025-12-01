@@ -1,9 +1,11 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import SiteHeader from '@/Components/SiteHeader.vue';
+import SiteFooter from '@/Components/SiteFooter.vue';
+import Card from '@/Components/Card.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
@@ -21,17 +23,25 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Register" />
+  <div class="min-h-screen bg-white text-gray-900">
+    <SiteHeader />
 
-        <form @submit.prevent="submit">
+    <main class="max-w-md mx-auto px-6 py-12">
+      <Card>
+        <div class="text-center mb-6">
+          <div class="text-5xl mb-2">🏆</div>
+          <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Criar conta</h1>
+          <p class="text-sm text-gray-500 mt-2">Cadastre-se para acompanhar seu progresso e participar dos quizzes</p>
+        </div>
+
+        <form @submit.prevent="submit" class="space-y-4">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nome" />
 
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full border border-purple-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                     v-model="form.name"
                     required
                     autofocus
@@ -41,13 +51,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
-            <div class="mt-4">
+            <div>
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full border border-purple-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                     v-model="form.email"
                     required
                     autocomplete="username"
@@ -56,13 +66,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div>
+                <InputLabel for="password" value="Senha" />
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full border border-purple-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                     v-model="form.password"
                     required
                     autocomplete="new-password"
@@ -71,16 +81,16 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4">
+            <div>
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Confirmar senha"
                 />
 
                 <TextInput
                     id="password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full border border-purple-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"
@@ -92,22 +102,26 @@ const submit = () => {
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="flex items-center justify-end gap-3">
                 <Link
                     :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="text-sm text-gray-600 hover:text-purple-600 transition font-medium"
                 >
-                    Already registered?
+                    Já registrado?
                 </Link>
 
                 <PrimaryButton
-                    class="ms-4"
+                    class="bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-lg transition"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
+                    Criar conta
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
+      </Card>
+    </main>
+
+    <SiteFooter />
+  </div>
 </template>
