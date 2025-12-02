@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\QuizResult;
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -10,7 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         $results = QuizResult::where('user_id', $user->id)
             ->with('category')
             ->orderByDesc('created_at')
@@ -27,6 +28,16 @@ class DashboardController extends Controller
             $query->where('user_id', $user->id);
         }])->get()->map(function ($category) use ($results) {
             $categoryResults = $results->where('category_id', $category->id);
+            $latestResult = $categoryResults->first();
+
+            $onCooldown = false;
+            $nextQuizTime = null;
+
+            if ($latestResult && Carbon::parse($latestResult->created_at)->addDay()->isFuture()) {
+                $onCooldown = true;
+                $nextQuizTime = Carbon::parse($latestResult->created_at)->addDay()->diffForHumans();
+            }
+
             return [
                 'id' => $category->id,
                 'name' => $category->name,
@@ -36,6 +47,8 @@ class DashboardController extends Controller
                 'completed' => $categoryResults->count(),
                 'best_score' => $categoryResults->count() > 0 ? $categoryResults->max('score') : 0,
                 'average_score' => $categoryResults->count() > 0 ? round($categoryResults->avg('score'), 1) : 0,
+                'on_cooldown' => $onCooldown,
+                'next_quiz_time' => $nextQuizTime,
             ];
         });
 

@@ -4,18 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\QuizResult;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class QuizController extends Controller
 {
     public function show(Category $category)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $lastResult = QuizResult::where('user_id', $user->id)
+            ->where('category_id', $category->id)
+            ->latest()
+            ->first();
+
+        if ($lastResult && Carbon::parse($lastResult->created_at)->addDay()->isFuture()) {
+            $nextQuizTime = Carbon::parse($lastResult->created_at)->addDay()->diffForHumans();
+            return back()->with('error', 'Você já respondeu a este quiz hoje. Próximo quiz disponível ' . $nextQuizTime);
+        }
+
         $category->load('questions');
 
         return Inertia::render('Quiz', [
             'category' => $category,
-            'questions' => $category->questions
+            'questions' => $category->questions->take(10)
         ]);
     }
 
@@ -26,9 +41,10 @@ class QuizController extends Controller
             'total_questions' => 'required|integer',
             'correct_answers' => 'required|integer',
             'wrong_answers' => 'required|integer',
-            'score' => 'required|integer',
             'user_answers' => 'required|array',
         ]);
+
+        $score = $validated['correct_answers'] * 10;
 
         $result = QuizResult::create([
             'user_id' => auth()->id(),
@@ -36,10 +52,15 @@ class QuizController extends Controller
             'total_questions' => $validated['total_questions'],
             'correct_answers' => $validated['correct_answers'],
             'wrong_answers' => $validated['wrong_answers'],
-            'score' => $validated['score'],
+            'score' => $score,
             'user_answers' => $validated['user_answers'],
         ]);
 
-        return back()->with('message', 'Quiz salvo com sucesso!');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->score += $score;
+        $user->save();
+
+        return redirect()->route('dashboard')->with('message', 'Quiz salvo com sucesso! Sua pontuação foi atualizada.');
     }
 }

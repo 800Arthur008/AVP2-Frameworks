@@ -40,6 +40,12 @@ const isAdmin = computed(() => Boolean(page.props.auth?.user?.is_admin));
                                     Dashboard
                                 </NavLink>
                                 <NavLink
+                                    :href="route('ranking')"
+                                    :active="route().current('ranking')"
+                                >
+                                    Ranking
+                                </NavLink>
+                                <NavLink
                                     v-if="isAdmin"
                                     :href="route('admin.dashboard')"
                                     :active="route().current('admin.dashboard')"
@@ -152,6 +158,12 @@ const isAdmin = computed(() => Boolean(page.props.auth?.user?.is_admin));
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('ranking')"
+                            :active="route().current('ranking')"
+                        >
+                            Ranking
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             v-if="isAdmin"

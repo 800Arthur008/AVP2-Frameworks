@@ -67,11 +67,7 @@ const saveResult = () => {
 }
 
 
-const restartQuiz = () => {
-    currentQuestionIndex.value = 0
-    selectedAnswers.value = {}
-    quizFinished.value = false
-}
+
 </script>
 
 <template>
@@ -197,19 +193,13 @@ const restartQuiz = () => {
           </div>
 
           <!-- Botões Finais -->
-          <div class="flex gap-3">
+          <div class="flex justify-center">
             <button
               @click="saveResult"
               :disabled="isSaving"
-              class="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition disabled:opacity-50"
+              class="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition disabled:opacity-50"
             >
               {{ isSaving ? 'Salvando...' : 'Salvar e Ir para Dashboard' }} ✅
-            </button>
-            <button
-              @click="restartQuiz"
-              class="flex-1 px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition"
-            >
-              Refazer Quiz 🔄
             </button>
           </div>
         </Card>
