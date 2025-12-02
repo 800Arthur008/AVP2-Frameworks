@@ -39,7 +39,7 @@ const submit = () => {
       <Card>
         <div class="text-center mb-6">
           <div class="text-5xl mb-2">🧠</div>
-          <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Entrar</h1>
+          <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 text-center">Entrar</h1>
           <p class="text-sm text-gray-500 mt-2">Acesse sua conta e comece a responder quizzes</p>
         </div>
 

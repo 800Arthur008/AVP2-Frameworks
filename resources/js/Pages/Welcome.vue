@@ -61,7 +61,7 @@ const quizzes = [
             <p class="text-sm opacity-90">Cadastre-se e acompanhe seu progresso com estatísticas e recomendações.</p>
           </div>
           <div>
-            <Link v-if="$page.props.canRegister" href="/register"><button class="inline-flex items-center gap-2 bg-white text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 px-5 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl"><span>✨</span> Cadastre-se gratuitamente</button></Link>
+            <Link v-if="$page.props.canRegister" href="/register"><button class="inline-flex items-center gap-2 bg-white text-transparent bg-clip-text text-black px-5 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl"><span>✨</span> Cadastre-se gratuitamente</button></Link>
           </div>
         </div>
       </section>

@@ -33,26 +33,33 @@ defineProps({
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <Link
-                                v-for="category in categories"
-                                :key="category.id"
-                                :href="`/quiz/${category.id}`"
-                                class="group"
-                            >
-                                <div
-                                    :class="[
-                                        `bg-gradient-to-br ${category.gradient}`,
-                                        'p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all cursor-pointer text-white h-full'
-                                    ]"
+                            <div v-for="category in categories" :key="category.id" class="relative">
+                                <Link
+                                    :href="category.on_cooldown ? '#' : `/quiz/${category.id}`"
+                                    :class="['group', { 'pointer-events-none': category.on_cooldown }]"
                                 >
-                                    <div class="text-center">
-                                        <div class="text-6xl mb-4 group-hover:scale-125 transition-transform">{{ category.icon }}</div>
-                                        <h3 class="text-2xl font-bold text-black">
-                                            {{ category.name }}
-                                        </h3>
+                                    <div
+                                        :class="[
+                                            `bg-gradient-to-br ${category.gradient}`,
+                                            'p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all cursor-pointer text-white h-full',
+                                            { 'opacity-50': category.on_cooldown }
+                                        ]"
+                                    >
+                                        <div class="text-center">
+                                            <div class="text-6xl mb-4 group-hover:scale-125 transition-transform">{{ category.icon }}</div>
+                                            <h3 class="text-2xl font-bold text-black">
+                                                {{ category.name }}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </Link>
+                                <div v-if="category.on_cooldown" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-xl">
+                                    <div class="text-center text-white">
+                                        <p class="text-lg font-bold">Indisponível</p>
+                                        <p>{{ category.next_quiz_time }}</p>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
 
                         <!-- Stats Section -->
