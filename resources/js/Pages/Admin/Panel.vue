@@ -6,7 +6,8 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
+import 'emoji-picker-element';
 
 const props = defineProps({
     categories: {
@@ -21,10 +22,11 @@ const flashMessage = computed(() => page.props.flash?.message);
 
 const categoryForm = useForm({
     name: '',
-    icon: '',
+    icon: '✨',
 });
 
 const editForm = useForm({
+    id: null,
     name: '',
     icon: '',
 });
@@ -45,12 +47,28 @@ const adminForm = useForm({
     password_confirmation: '',
 });
 
-const editingId = ref(null);
+const showEmojiPicker = ref(false);
+const emojiPickerTarget = ref(null); // 'create' or 'edit'
+
+const handleEmojiSelect = (event) => {
+    if (emojiPickerTarget.value === 'create') {
+        categoryForm.icon = event.detail.unicode;
+    } else if (emojiPickerTarget.value === 'edit') {
+        editForm.icon = event.detail.unicode;
+    }
+    showEmojiPicker.value = false;
+};
+
+const openEmojiPicker = (target) => {
+    emojiPickerTarget.value = target;
+    showEmojiPicker.value = true;
+};
+
 
 const submitCategory = () => {
     categoryForm.post(route('admin.categories.store'), {
         preserveScroll: true,
-        onSuccess: () => categoryForm.reset(),
+        onSuccess: () => categoryForm.reset('name', 'icon'),
     });
 };
 
@@ -73,20 +91,20 @@ const submitAdmin = () => {
 };
 
 const startEditing = (category) => {
-    editingId.value = category.id;
+    editForm.id = category.id;
     editForm.name = category.name;
     editForm.icon = category.icon;
     editForm.clearErrors();
 };
 
 const cancelEditing = () => {
-    editingId.value = null;
     editForm.reset();
     editForm.clearErrors();
+    editForm.id = null;
 };
 
-const submitEdit = (categoryId) => {
-    editForm.patch(route('admin.categories.update', categoryId), {
+const submitEdit = () => {
+    editForm.patch(route('admin.categories.update', editForm.id), {
         preserveScroll: true,
         onSuccess: () => cancelEditing(),
     });
@@ -104,7 +122,7 @@ const destroyCategory = (categoryId) => {
     deleteForm.delete(route('admin.categories.destroy', categoryId), {
         preserveScroll: true,
         onFinish: () => {
-            if (editingId.value === categoryId) {
+            if (editForm.id === categoryId) {
                 cancelEditing();
             }
         },
@@ -146,6 +164,20 @@ const removeOption = (index) => {
                     {{ flashMessage }}
                 </div>
 
+                <!-- Emoji Picker Modal -->
+                <div
+                    v-if="showEmojiPicker"
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                    @click.self="showEmojiPicker = false"
+                >
+                    <div class="bg-white rounded-lg shadow-xl">
+                        <emoji-picker
+                            class="w-full h-96"
+                            @emoji-click="handleEmojiSelect"
+                        ></emoji-picker>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
                     <div class="bg-white shadow rounded-xl p-6 space-y-6">
                         <h3 class="text-lg font-semibold text-gray-800">
@@ -168,14 +200,19 @@ const removeOption = (index) => {
 
                             <div>
                                 <InputLabel for="icon" value="Ícone/emoji" />
-                                <TextInput
-                                    id="icon"
-                                    v-model="categoryForm.icon"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    placeholder="ex: 🔬"
-                                    required
-                                />
+                                <div class="mt-1 flex items-center gap-3">
+                                     <TextInput
+                                        id="icon"
+                                        v-model="categoryForm.icon"
+                                        type="text"
+                                        class="block w-24 text-center text-2xl"
+                                        placeholder="✨"
+                                        required
+                                    />
+                                    <SecondaryButton type="button" @click="openEmojiPicker('create')">
+                                        Escolher emoji
+                                    </SecondaryButton>
+                                </div>
                                 <InputError :message="categoryForm.errors.icon" class="mt-2" />
                             </div>
 
@@ -382,12 +419,12 @@ const removeOption = (index) => {
                                 </div>
                             </div>
 
-                            <div v-if="editingId === category.id" class="space-y-4">
+                            <div v-if="editForm.id === category.id" class="space-y-4">
                                 <h4 class="text-lg font-semibold text-gray-800">
                                     Editar categoria
                                 </h4>
 
-                                <form @submit.prevent="submitEdit(category.id)" class="space-y-3">
+                                <form @submit.prevent="submitEdit" class="space-y-3">
                                     <div>
                                         <InputLabel :for="`edit-name-${category.id}`" value="Nome" />
                                         <TextInput
@@ -402,13 +439,18 @@ const removeOption = (index) => {
 
                                     <div>
                                         <InputLabel :for="`edit-icon-${category.id}`" value="Ícone/emoji" />
-                                        <TextInput
-                                            :id="`edit-icon-${category.id}`"
-                                            v-model="editForm.icon"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            required
-                                        />
+                                        <div class="mt-1 flex items-center gap-3">
+                                            <TextInput
+                                                :id="`edit-icon-${category.id}`"
+                                                v-model="editForm.icon"
+                                                type="text"
+                                                class="block w-24 text-center text-2xl"
+                                                required
+                                            />
+                                            <SecondaryButton type="button" @click="openEmojiPicker('edit')">
+                                                Escolher emoji
+                                            </SecondaryButton>
+                                        </div>
                                         <InputError :message="editForm.errors.icon" class="mt-2" />
                                     </div>
 
@@ -464,7 +506,3 @@ const removeOption = (index) => {
         </div>
     </AuthenticatedLayout>
 </template>
-
-
-
-
