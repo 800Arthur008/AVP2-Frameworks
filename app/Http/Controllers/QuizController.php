@@ -26,11 +26,13 @@ class QuizController extends Controller
             return back()->with('error', 'Você já respondeu a este quiz hoje. Próximo quiz disponível ' . $nextQuizTime);
         }
 
-        $category->load('questions');
+        $category->load(['questions' => function ($query) {
+            $query->inRandomOrder()->take(10);
+        }]);
 
         return Inertia::render('Quiz', [
             'category' => $category,
-            'questions' => $category->questions->take(10)
+            'questions' => $category->questions
         ]);
     }
 

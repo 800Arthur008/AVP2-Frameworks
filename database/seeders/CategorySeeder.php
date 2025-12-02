@@ -105,6 +105,77 @@ class CategorySeeder extends Seeder
             'correct_option' => 2
         ]);
 
+        // === PERGUNTAS ADICIONAIS DE HISTÓRIA ===
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Em que ano ocorreu a Proclamação da República no Brasil?',
+            'options' => ['1822', '1889', '1891', '1930'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Qual foi a primeira capital do Brasil?',
+            'options' => ['Rio de Janeiro', 'São Paulo', 'Salvador', 'Brasília'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Quem foi o imperador da França durante as Guerras Napoleônicas?',
+            'options' => ['Luís XIV', 'Napoleão Bonaparte', 'Carlos Magno', 'Henrique IV'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'O Muro de Berlim foi derrubado em que ano?',
+            'options' => ['1985', '1989', '1991', '1995'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Qual imperador romano legalizou o cristianismo?',
+            'options' => ['Nero', 'Constantino', 'Marco Aurélio', 'Calígula'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'A Guerra dos Cem Anos foi travada entre quais países?',
+            'options' => ['Inglaterra e Espanha', 'França e Alemanha', 'Inglaterra e França', 'Espanha e Portugal'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Quem foi o líder da Revolução Cubana?',
+            'options' => ['Che Guevara', 'Fidel Castro', 'Hugo Chávez', 'Salvador Allende'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Em que século ocorreu a Inquisição Espanhola?',
+            'options' => ['Século XII', 'Século XV', 'Século XVIII', 'Século XX'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Qual tratado encerrou a Primeira Guerra Mundial?',
+            'options' => ['Tratado de Tordesilhas', 'Tratado de Versalhes', 'Tratado de Paris', 'Tratado de Utrecht'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 1,
+            'question' => 'Quem foi a primeira mulher a governar o Brasil?',
+            'options' => ['Marina Silva', 'Dilma Rousseff', 'Marta Suplicy', 'Benedita da Silva'],
+            'correct_option' => 1
+        ]);
+
         // Perguntas de Jogos
         Question::create([
             'category_id' => 2,
@@ -174,6 +245,77 @@ class CategorySeeder extends Seeder
             'question' => 'Em GTA V, qual desses NÃO é um dos protagonistas principais?',
             'options' => ['Michael', 'Franklin', 'Trevor', 'Carl Johnson'],
             'correct_option' => 3
+        ]);
+
+        // === PERGUNTAS ADICIONAIS DE JOGOS ===
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Qual jogo tem o protagonista chamado Link?',
+            'options' => ['Zelda', 'Mario', 'Metroid', 'Kirby'],
+            'correct_option' => 0
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Em League of Legends, qual é o objetivo principal?',
+            'options' => ['Capturar bandeiras', 'Destruir o Nexus inimigo', 'Coletar moedas', 'Completar missões'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Qual empresa desenvolveu o jogo Counter-Strike?',
+            'options' => ['Riot Games', 'Valve', 'Blizzard', 'Epic Games'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'No jogo Dark Souls, qual é a principal característica?',
+            'options' => ['Facilidade extrema', 'Alta dificuldade', 'Sem combate', 'Jogo infantil'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Qual personagem é conhecido por dizer "It\'s-a me!"?',
+            'options' => ['Sonic', 'Mario', 'Luigi', 'Donkey Kong'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Em qual jogo você precisa sobreviver em uma ilha com dinossauros?',
+            'options' => ['Rust', 'Ark: Survival Evolved', 'Minecraft', 'Terraria'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Qual console foi lançado primeiro?',
+            'options' => ['PlayStation 2', 'Xbox', 'Nintendo 64', 'Dreamcast'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Em FIFA, qual é o modo onde você monta seu próprio time?',
+            'options' => ['Career Mode', 'Volta', 'Ultimate Team', 'Pro Clubs'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Qual jogo é conhecido pela frase "War never changes"?',
+            'options' => ['Call of Duty', 'Battlefield', 'Fallout', 'Medal of Honor'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 2,
+            'question' => 'Em Pokémon, qual é o tipo do Pikachu?',
+            'options' => ['Fogo', 'Água', 'Elétrico', 'Grama'],
+            'correct_option' => 2
         ]);
 
         // Perguntas de Filmes
@@ -247,6 +389,77 @@ class CategorySeeder extends Seeder
             'correct_option' => 2
         ]);
 
+        // === PERGUNTAS ADICIONAIS DE FILMES ===
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Qual filme tem a frase "Que a Força esteja com você"?',
+            'options' => ['Star Trek', 'Star Wars', 'Guardiões da Galáxia', 'Avatar'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Quem interpretou Jack Dawson em Titanic?',
+            'options' => ['Brad Pitt', 'Johnny Depp', 'Leonardo DiCaprio', 'Tom Cruise'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Qual é o nome do leão em O Rei Leão?',
+            'options' => ['Mufasa', 'Simba', 'Scar', 'Timão'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Em qual filme aparece o personagem Forrest Gump?',
+            'options' => ['O Resgate do Soldado Ryan', 'Forrest Gump', 'Apollo 13', 'Náufrago'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Qual saga de filmes tem Frodo Bolseiro como protagonista?',
+            'options' => ['Harry Potter', 'Nárnia', 'O Senhor dos Anéis', 'Percy Jackson'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Quem dirigiu o filme "Interestelar"?',
+            'options' => ['James Cameron', 'Christopher Nolan', 'Ridley Scott', 'Denis Villeneuve'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Em qual filme o ator Heath Ledger interpretou o Coringa?',
+            'options' => ['Batman Begins', 'O Cavaleiro das Trevas', 'Coringa', 'Batman vs Superman'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Qual é o nome do parque em Jurassic Park?',
+            'options' => ['DinoLand', 'Jurassic World', 'Isla Nublar Park', 'Parque dos Dinossauros'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Qual filme da Marvel foi lançado primeiro?',
+            'options' => ['Thor', 'Homem de Ferro', 'Hulk', 'Capitão América'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 3,
+            'question' => 'Em Harry Potter, qual é a casa de Hermione?',
+            'options' => ['Sonserina', 'Grifinória', 'Corvinal', 'Lufa-Lufa'],
+            'correct_option' => 1
+        ]);
+
         // Perguntas de Geografia
         Question::create([
             'category_id' => 4,
@@ -273,7 +486,7 @@ class CategorySeeder extends Seeder
             'category_id' => 4,
             'question' => 'Qual é o rio mais extenso do mundo?',
             'options' => ['Mississippi', 'Nilo', 'Yangtzé', 'Amazonas'],
-            'correct_option' => 1
+            'correct_option' => 3
         ]);
 
         Question::create([
@@ -315,6 +528,77 @@ class CategorySeeder extends Seeder
             'category_id' => 4,
             'question' => 'O deserto do Saara está localizado em qual continente?',
             'options' => ['Europa', 'América', 'África', 'Ásia'],
+            'correct_option' => 2
+        ]);
+
+        // === PERGUNTAS ADICIONAIS DE GEOGRAFIA ===
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual é a capital da Austrália?',
+            'options' => ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual país é conhecido como "Terra do Sol Nascente"?',
+            'options' => ['China', 'Japão', 'Coreia do Sul', 'Tailândia'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Quantos continentes existem no mundo?',
+            'options' => ['5', '6', '7', '8'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual é o único país que faz fronteira com o Reino Unido?',
+            'options' => ['Escócia', 'País de Gales', 'Irlanda', 'França'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual é a moeda oficial do Japão?',
+            'options' => ['Won', 'Yuan', 'Iene', 'Baht'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Em qual país está localizada a Torre Eiffel?',
+            'options' => ['Itália', 'França', 'Inglaterra', 'Espanha'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual é o maior deserto do mundo?',
+            'options' => ['Saara', 'Gobi', 'Antártica', 'Kalahari'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual destes países NÃO faz parte da América do Sul?',
+            'options' => ['Equador', 'Panamá', 'Paraguai', 'Uruguai'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual é a capital da Itália?',
+            'options' => ['Milão', 'Veneza', 'Roma', 'Florença'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 4,
+            'question' => 'Qual país tem o formato de uma bota?',
+            'options' => ['Grécia', 'Espanha', 'Itália', 'Croácia'],
             'correct_option' => 2
         ]);
 
@@ -394,6 +678,77 @@ class CategorySeeder extends Seeder
             'correct_option' => 1
         ]);
 
+        // === PERGUNTAS ADICIONAIS DE COMPUTAÇÃO ===
+        Question::create([
+            'category_id' => 5,
+            'question' => 'O que significa CPU?',
+            'options' => ['Central Processing Unit', 'Computer Personal Unit', 'Central Program Utility', 'Control Processing Unit'],
+            'correct_option' => 0
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'Qual desses é um navegador web?',
+            'options' => ['Photoshop', 'Firefox', 'Excel', 'Spotify'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'Quantos bits tem 1 byte?',
+            'options' => ['4', '8', '16', '32'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'O que é SSD?',
+            'options' => ['Sistema de Som Digital', 'Solid State Drive', 'Super Speed Data', 'Screen Size Display'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'Qual protocolo é usado para enviar emails?',
+            'options' => ['HTTP', 'FTP', 'SMTP', 'DNS'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'O que significa URL?',
+            'options' => ['Uniform Resource Locator', 'Universal Reading Link', 'User Request Location', 'Unified Remote Line'],
+            'correct_option' => 0
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'Qual empresa criou o Windows?',
+            'options' => ['Apple', 'IBM', 'Microsoft', 'Google'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'O que é um cookie em navegadores?',
+            'options' => ['Vírus', 'Arquivo de dados do site', 'Programa antivírus', 'Sistema operacional'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'Qual porta usa o protocolo HTTPS?',
+            'options' => ['80', '443', '8080', '22'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 5,
+            'question' => 'O que é um backup?',
+            'options' => ['Vírus', 'Cópia de segurança de dados', 'Tipo de hardware', 'Programa malicioso'],
+            'correct_option' => 1
+        ]);
+
         // Perguntas de Programação
         Question::create([
             'category_id' => 6,
@@ -462,6 +817,77 @@ class CategorySeeder extends Seeder
             'category_id' => 6,
             'question' => 'Em C, qual especificador imprime um número inteiro?',
             'options' => ['%c', '%f', '%d', '%s'],
+            'correct_option' => 2
+        ]);
+
+        // === PERGUNTAS ADICIONAIS DE PROGRAMAÇÃO ===
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Qual linguagem é conhecida por ter uma cobra como mascote?',
+            'options' => ['Java', 'Python', 'Ruby', 'PHP'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'O que significa CSS?',
+            'options' => ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System', 'Code Style Sheets'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Qual estrutura de dados usa LIFO?',
+            'options' => ['Fila', 'Pilha', 'Lista', 'Árvore'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Em JavaScript, qual palavra-chave declara uma constante?',
+            'options' => ['var', 'let', 'const', 'define'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Qual desses NÃO é um tipo de dado primitivo em JavaScript?',
+            'options' => ['String', 'Number', 'Array', 'Boolean'],
+            'correct_option' => 2
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'O que é JSON?',
+            'options' => ['Uma linguagem de programação', 'Um formato de dados', 'Um banco de dados', 'Um framework'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Qual método HTTP é usado para enviar dados de um formulário?',
+            'options' => ['GET', 'POST', 'PUT', 'DELETE'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'O que significa "API"?',
+            'options' => ['Application Program Interface', 'Application Programming Interface', 'Advanced Programming Interface', 'Automated Program Interface'],
+            'correct_option' => 1
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Qual é o resultado de "10" == 10 em JavaScript?',
+            'options' => ['true', 'false', 'undefined', 'Erro'],
+            'correct_option' => 0
+        ]);
+
+        Question::create([
+            'category_id' => 6,
+            'question' => 'Em SQL, qual comando é usado para recuperar dados?',
+            'options' => ['INSERT', 'UPDATE', 'SELECT', 'DELETE'],
             'correct_option' => 2
         ]);
     }
